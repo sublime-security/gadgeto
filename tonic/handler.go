@@ -152,6 +152,7 @@ func RegisterValidation(tagName string, validationFunc validator.Func) error {
 
 // RegisterTagNameFunc registers a function to get alternate names for StructFields
 func RegisterTagNameFunc(registerTagFunc validator.TagNameFunc) {
+	initValidator()
 	validatorObj.RegisterTagNameFunc(registerTagFunc)
 }
 
