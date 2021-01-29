@@ -9,8 +9,8 @@ import (
 	"sync"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
-	validator "gopkg.in/go-playground/validator.v9"
 )
 
 var (
@@ -148,6 +148,11 @@ func Handler(h interface{}, status int, options ...func(*Route)) gin.HandlerFunc
 func RegisterValidation(tagName string, validationFunc validator.Func) error {
 	initValidator()
 	return validatorObj.RegisterValidation(tagName, validationFunc)
+}
+
+// RegisterTagNameFunc registers a function to get alternate names for StructFields
+func RegisterTagNameFunc(registerTagFunc validator.TagNameFunc) {
+	validatorObj.RegisterTagNameFunc(registerTagFunc)
 }
 
 func initValidator() {
